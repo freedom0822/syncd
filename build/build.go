@@ -76,7 +76,7 @@ func (b *Build) initBuildTask() {
         fmt.Sprintf("rm -f %s", b.packFile),
         fmt.Sprintf("/bin/bash -c %s", b.scriptFile),
         fmt.Sprintf("rm -f %s", b.scriptFile),
-        fmt.Sprintf("rm -fr %s", b.local),
+        // fmt.Sprintf("rm -fr %s", b.local),
         "echo \"Compile completed\" `date`",
     }...)
     b.task = command.NewTask(cmds, COMMAND_TIMEOUT)

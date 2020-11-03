@@ -1,5 +1,7 @@
 module github.com/dreamans/syncd
 
+go 1.15
+
 require (
 	cloud.google.com/go v0.36.0 // indirect
 	github.com/Unknwon/goconfig v0.0.0-20181105214110-56bd8ab18619
