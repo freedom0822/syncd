@@ -45,14 +45,15 @@
                 @current-change="currentChangeHandler"
                 :current-page.sync="$root.Page"
                 :page-size="$root.PageSize"
-                :total="$root.Total">
+                :total="$root.Total"
+                :rows-per-page-items="[30, 50, 100]">
             </el-pagination>
         </el-card>
 
         <el-dialog :width="$root.DialogNormalWidth" :title="dialogTitle" :visible.sync="dialogVisible" @close="dialogCloseHandler">
             <div class="app-dialog" v-loading="dialogLoading">
                 <el-form ref="dialogRef" :model="dialogForm" size="medium" label-width="120px">
-                    <el-form-item 
+                    <el-form-item
                         :label="$t('project_space_name')"
                         prop="name"
                         :rules="[
@@ -60,7 +61,7 @@
                         ]">
                         <el-input v-model="dialogForm.name" autocomplete="off"></el-input>
                     </el-form-item>
-                    <el-form-item 
+                    <el-form-item
                         :label="$t('description')"
                         prop="description">
                         <el-input type="textarea" :rows="6" v-model="dialogForm.description" autocomplete="off"></el-input>
@@ -90,6 +91,10 @@ export default {
 
             tableData: [],
             tableLoading: false,
+
+            pagination: {
+                rowsPerPage: 30,
+            },
         }
     },
     methods: {

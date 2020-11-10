@@ -28,7 +28,7 @@
                 <div class="app-btn-title">{{ $t('add_new_member') }}</div>
                 <el-row class="app-btn-group">
                     <el-col :span="10">
-                        <el-select 
+                        <el-select
                         v-model="memberId"
                         style="width: 100%;"
                         size="small"
@@ -93,7 +93,7 @@
             </el-pagination>
         </el-card>
 
-        <el-dialog 
+        <el-dialog
         :width="$root.DialogSmallWidth"
         :visible.sync="dialogSpaceVisible"
         :title="$t('select_project_space')">
@@ -112,6 +112,8 @@ import Code from '@/lib/code'
 export default {
     data() {
         return {
+            itemsPerPage: 50,
+
             dialogSpaceVisible: false,
 
             tableData: [],

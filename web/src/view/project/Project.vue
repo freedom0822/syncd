@@ -34,7 +34,7 @@
                     </el-input>
                 </el-col>
             </el-row>
-            
+
             <el-table
                 class="app-table"
                 size="medium"
@@ -107,7 +107,7 @@
             <div class="app-dialog" v-loading="dialogLoading">
                 <el-form class="app-form" ref="dialogRef" :model="dialogForm" size="medium" label-width="130px">
                     <h4 class="app-form-subtitle">{{ $t('base_setting') }}</h4>
-                    <el-form-item 
+                    <el-form-item
                     :label="$t('project_name')"
                     prop="name"
                     :rules="[
@@ -166,7 +166,7 @@
                         <div class="app-form-explain">{{ $t('deploy_mode_tips') }}</div>
                     </el-form-item>
 
-                    <el-form-item 
+                    <el-form-item
                     v-if="dialogForm.deploy_mode == 1"
                     :label="$t('repo_branch')"
                     prop="repo_branch">
@@ -176,7 +176,7 @@
                     <div class="app-divider"></div>
                     <h4 class="app-form-subtitle">{{ $t('deploy_setting') }}</h4>
 
-                    <el-form-item 
+                    <el-form-item
                     :label="$t('online_cluster')"
                     prop="online_cluster"
                     :rules="[
@@ -209,7 +209,7 @@
                         </div>
                     </el-form-item>
 
-                    <el-form-item 
+                    <el-form-item
                     :label="$t('user')"
                     prop="deploy_user"
                     :rules="[
@@ -218,7 +218,7 @@
                         <el-input class="app-input-mini" :placeholder="$t('deploy_user')" v-model="dialogForm.deploy_user" autocomplete="off"></el-input>
                     </el-form-item>
 
-                    <el-form-item 
+                    <el-form-item
                     :label="$t('path')"
                     prop="deploy_path"
                     :rules="[
@@ -227,13 +227,13 @@
                         <el-input :placeholder="$t('deploy_path')" v-model="dialogForm.deploy_path" autocomplete="off"></el-input>
                     </el-form-item>
 
-                    <el-form-item 
+                    <el-form-item
                     :label="$t('pre_deploy_cmd')"
                     prop="pre_deploy_cmd">
                         <el-input :placeholder="$t('pre_deploy_cmd_tips')" type="textarea" :rows="3" v-model="dialogForm.pre_deploy_cmd" autocomplete="off"></el-input>
                     </el-form-item>
 
-                    <el-form-item 
+                    <el-form-item
                     :label="$t('after_deploy_cmd')"
                     prop="after_deploy_cmd">
                         <el-input :placeholder="$t('after_deploy_cmd_tips')" type="textarea" :rows="3" v-model="dialogForm.after_deploy_cmd" autocomplete="off"></el-input>
@@ -241,13 +241,13 @@
 
                     <div class="app-divider"></div>
                     <h4 class="app-form-subtitle">{{ $t('email_setting') }}</h4>
-                    <el-form-item 
+                    <el-form-item
                     :label="$t('audit_notice')"
                     prop="audit_notice">
                         <el-input :placeholder="$t('audit_notice_tips')" v-model="dialogForm.audit_notice" autocomplete="off"></el-input>
                         <div class="app-form-explain" v-html="$t('audit_notice_explain')"></div>
                     </el-form-item>
-                    <el-form-item 
+                    <el-form-item
                     :label="$t('deploy_notice')"
                     prop="deploy_notice">
                         <el-input :placeholder="$t('deploy_notice_tips')" v-model="dialogForm.deploy_notice" autocomplete="off"></el-input>
@@ -266,7 +266,7 @@
             <div class="app-dialog" v-loading="dialogViewLoading">
                 <el-form size="medium" label-width="130px">
                     <h4 class="app-form-subtitle">{{ $t('base_setting') }}</h4>
-                    <el-form-item 
+                    <el-form-item
                     :label="$t('project_id')">
                         {{ dialogViewForm.id }}
                     </el-form-item>
@@ -303,7 +303,7 @@
                     <el-form-item :label="$t('repo_branch')">
                         {{ dialogViewForm.repo_branch }}
                     </el-form-item>
-                
+
                     <div class="app-divider"></div>
                     <h4 class="app-form-subtitle">{{ $t('deploy_setting') }}</h4>
 
@@ -394,7 +394,7 @@
                             <p><i class="iconfont icon-dot"></i><span class="code">${env_deploy_status}</span> - 部署状态</p>
                         </div>
                     </el-form-item>
-                </el-form>                
+                </el-form>
                 <div slot="footer" class="dialog-footer">
                     <el-button size="small" @click="dialogHookVisible = false">{{ $t('cancel') }}</el-button>
                     <el-button :loading="btnLoading" size="small" type="primary" @click="dialogSubmitHookHandler">{{ $t('enter') }}</el-button>
@@ -402,7 +402,7 @@
             </div>
         </el-dialog>
 
-        <el-dialog 
+        <el-dialog
         :width="$root.DialogSmallWidth"
         :visible.sync="dialogSpaceVisible"
         :title="$t('select_project_space')">
@@ -417,19 +417,19 @@
 </template>
 
 <script>
-import { 
-    listSpaceApi, 
-    detailSpaceApi, 
-    newProjectApi, 
-    updateProjectApi, 
-    listProjectApi, 
-    switchStatusProjectApi, 
-    detailProjectApi, 
-    deleteProjectApi, 
+import {
+    listSpaceApi,
+    detailSpaceApi,
+    newProjectApi,
+    updateProjectApi,
+    listProjectApi,
+    switchStatusProjectApi,
+    detailProjectApi,
+    deleteProjectApi,
     updateBuildScriptApi,
     updateHookScriptApi
 } from '@/api/project'
-import { listGroupApi } from '@/api/server' 
+import { listGroupApi } from '@/api/server'
 import codeMirror from 'codemirror/lib/codemirror.js'
 import 'codemirror/lib/codemirror.css'
 import 'codemirror/mode/shell/shell.js'
@@ -440,6 +440,8 @@ import 'codemirror/addon/scroll/simplescrollbars.js'
 export default {
     data() {
         return {
+            itemsPerPage: 50,
+
             editorInstance: null,
             dialogBuildVisible: false,
             dialogBuildLoading: false,
@@ -576,7 +578,7 @@ export default {
             this.editorInstance.setValue(content)
         },
         getBuildEditorValue() {
-            if (!this.editorInstance) {        
+            if (!this.editorInstance) {
                 return ''
             }
             return this.editorInstance.getValue()

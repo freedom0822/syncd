@@ -5,8 +5,8 @@
                 <el-col :span="3">
                     <el-select
                     :placeholder="$t('submit_time')"
-                    size="medium" 
-                    clearable style="width: 100%" 
+                    size="medium"
+                    clearable style="width: 100%"
                     v-model="searchTime">
                         <el-option
                             v-for="s in timeList"
@@ -19,9 +19,9 @@
                 <el-col :span="3">
                     <el-select
                     :placeholder="$t('audit_status')"
-                    size="medium" 
-                    clearable 
-                    style="width: 100%" 
+                    size="medium"
+                    clearable
+                    style="width: 100%"
                     v-model="searchAuditStatus">
                         <el-option
                             v-for="s in auditStatusList"
@@ -34,9 +34,9 @@
                 <el-col :span="3">
                     <el-select
                     :placeholder="$t('deploy_status')"
-                    size="medium" 
-                    clearable 
-                    style="width: 100%" 
+                    size="medium"
+                    clearable
+                    style="width: 100%"
                     v-model="searchStatus">
                         <el-option
                             v-for="s in statusList"
@@ -49,9 +49,9 @@
                 <el-col :span="9">
                     <el-select
                     :placeholder="$t('select_project')"
-                    size="medium" 
-                    clearable 
-                    style="width: 100%" 
+                    size="medium"
+                    clearable
+                    style="width: 100%"
                     v-model="searchProjectId">
                         <el-option
                         v-for="p in projectList"
@@ -72,7 +72,8 @@
                 class="app-table"
                 size="medium"
                 v-loading="tableLoading"
-                :data="tableData">
+                :data="tableData"
+                :height="autoHeightRow">
                 <el-table-column prop="id" label="ID" width="80"></el-table-column>
                 <el-table-column prop="name" :label="$t('name')"></el-table-column>
                 <el-table-column :label="$t('project_name')">
@@ -126,7 +127,7 @@
                                 <el-dropdown-item command="view" v-if="$root.CheckPriv($root.Priv.DEPLOY_VIEW)">
                                     <i class="iconfont left small icon-view"></i>{{ $t('view') }}
                                 </el-dropdown-item>
-                                <el-dropdown-item command="edit" 
+                                <el-dropdown-item command="edit"
                                 v-if="scope.row.status == $root.ApplyStatusNone && (scope.row.audit_status == $root.AuditStatusPending || scope.row.audit_status == $root.AuditStatusRefuse) && $root.CheckPriv($root.Priv.DEPLOY_EDIT)">
                                     <i class="iconfont left small icon-edit"></i>{{ $t('edit') }}
                                 </el-dropdown-item>
@@ -149,11 +150,12 @@
             </el-table>
             <el-pagination
                 background
-                layout="prev, pager, next"
+                layout="prev, pager, next, pages"
                 class="app-pagination"
                 @current-change="currentChangeHandler"
                 :current-page.sync="$root.Page"
                 :page-size="$root.PageSize"
+                :page_sizes="[30,50,100]"
                 :total="$root.Total">
             </el-pagination>
         </el-card>
@@ -219,17 +221,17 @@
         :visible.sync="dialogEditVisible"
         @close="closeEditDialogHandler">
             <div class="app-dialog" v-loading="dialogLoading">
-                <el-form 
-                class="app-form" 
-                ref="dialogRef" 
-                :model="dialogForm" 
-                size="medium" 
+                <el-form
+                class="app-form"
+                ref="dialogRef"
+                :model="dialogForm"
+                size="medium"
                 label-width="130px">
                     <el-form-item
                     :label="$t('project_name')">
                         {{ dialogDetail.project_name }}
                     </el-form-item>
-                    <el-form-item 
+                    <el-form-item
                     :label="$t('apply_name')">
                         {{ dialogDetail.name}}
                     </el-form-item>
@@ -242,7 +244,7 @@
                         </span>
                     </el-form-item>
 
-                    <el-form-item 
+                    <el-form-item
                     v-if="dialogDetail.deploy_mode == $root.DeployModelTag"
                     :label="$t('tag_name')"
                     prop="branch_name"
@@ -252,7 +254,7 @@
                         <el-input class="app-input-mini" :placeholder="$t('please_input_tag_name')" v-model="dialogForm.branch_name" autocomplete="off"></el-input>
                     </el-form-item>
 
-                    <el-form-item 
+                    <el-form-item
                     v-if="dialogDetail.deploy_mode == $root.DeployModeBranch && dialogDetail.repo_branch == ''"
                     :label="$t('branch_name')"
                     prop="branch_name"
@@ -262,14 +264,14 @@
                         <el-input class="app-input-mini" :placeholder="$t('please_input_branch_name')" v-model="dialogForm.branch_name" autocomplete="off"></el-input>
                     </el-form-item>
 
-                    <el-form-item 
+                    <el-form-item
                     v-if="dialogDetail.deploy_mode == $root.DeployModeBranch"
                     :label="$t('commit_version')"
                     prop="commit_version">
                         <el-input class="app-input-normal" :placeholder="$t('please_input_commit_version')" v-model="dialogForm.commit_version" autocomplete="off"></el-input>
                     </el-form-item>
 
-                    <el-form-item 
+                    <el-form-item
                     :label="$t('deploy_illustrate')"
                     prop="description"
                     :rules="[

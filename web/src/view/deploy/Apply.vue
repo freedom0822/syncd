@@ -10,8 +10,8 @@
                 ]">
                     <el-select
                     @change="changeSpaceHandler"
-                    v-model="form.space_id" 
-                    filterable 
+                    v-model="form.space_id"
+                    filterable
                     :placeholder="$t('please_input_keyword')">
                         <el-option
                         v-for="space in spaceList"
@@ -22,15 +22,15 @@
                     </el-select>
                 </el-form-item>
 
-                <el-form-item 
+                <el-form-item
                 :label="$t('select_project')"
                 prop="project_id"
                 :rules="[
                     { required: true, message: $t('project_cannot_empty'), trigger: 'blur'},
                 ]">
-                    <el-select 
-                    v-model="form.project_id" 
-                    filterable 
+                    <el-select
+                    v-model="form.project_id"
+                    filterable
                     :placeholder="$t('please_input_keyword')">
                         <el-option
                         v-for="proj in projectList"
@@ -42,8 +42,7 @@
                 </el-form-item>
 
                 <el-form-item>
-                    <el-button  icon="el-icon-edit-outline
-" size="small" type="primary" @click="openDialogHandler">{{ $t('input_apply_order') }}</el-button>
+                    <el-button  icon="el-icon-edit-outline" size="small" type="primary" @click="openDialogHandler">{{ $t('input_apply_order') }}</el-button>
                 </el-form-item>
 
             </el-form>
@@ -55,12 +54,12 @@
         @close="closeDialogHandler">
             <div class="app-dialog" v-loading="dialogLoading">
                 <el-form class="app-form" ref="dialogRef" :model="dialogForm" size="medium" label-width="130px">
-                    <el-form-item 
+                    <el-form-item
                     :label="$t('project_name')">
                         {{ projectDetail.name }}
                     </el-form-item>
-               
-                    <el-form-item 
+
+                    <el-form-item
                     :label="$t('apply_name')"
                     prop="name"
                     :rules="[
@@ -78,7 +77,7 @@
                         </span>
                     </el-form-item>
 
-                    <el-form-item 
+                    <el-form-item
                     v-if="projectDetail.deploy_mode == 2"
                     :label="$t('tag_name')"
                     prop="branch_name"
@@ -88,7 +87,7 @@
                         <el-input class="app-input-mini" :placeholder="$t('please_input_tag_name')" v-model="dialogForm.branch_name" autocomplete="off"></el-input>
                     </el-form-item>
 
-                    <el-form-item 
+                    <el-form-item
                     v-if="projectDetail.deploy_mode == 1 && projectDetail.repo_branch == ''"
                     :label="$t('branch_name')"
                     prop="branch_name"
@@ -98,14 +97,14 @@
                         <el-input class="app-input-mini" :placeholder="$t('please_input_branch_name')" v-model="dialogForm.branch_name" autocomplete="off"></el-input>
                     </el-form-item>
 
-                    <el-form-item 
+                    <el-form-item
                     v-if="projectDetail.deploy_mode == 1"
                     :label="$t('commit_version')"
                     prop="commit_version">
                         <el-input class="app-input-normal" :placeholder="$t('please_input_commit_version')" v-model="dialogForm.commit_version" autocomplete="off"></el-input>
                     </el-form-item>
 
-                    <el-form-item 
+                    <el-form-item
                     :label="$t('deploy_illustrate')"
                     prop="description"
                     :rules="[
@@ -117,9 +116,9 @@
                     <el-form-item
                     :label="$t('rollback_apply')"
                     prop="rollback_id">
-                        <el-select 
-                        v-model="dialogForm.rollback_id" 
-                        filterable 
+                        <el-select
+                        v-model="dialogForm.rollback_id"
+                        filterable
                         style="width: 100%;"
                         :placeholder="$t('please_input_keyword')">
                             <el-option
